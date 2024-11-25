@@ -10,6 +10,10 @@ def getAllProducts() :
 def getProduct(id) :
     return dataGetProduct(id)
 
+def getProductsByCategory(id) :
+    return dataGetProductsByCategory(id)
+
+
 # add new todo using data access
 def newProduct(input: Product) :
     # add product (via dataaccess)

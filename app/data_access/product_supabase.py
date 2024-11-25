@@ -15,9 +15,8 @@ supabase: Client = create_client(db_url, db_key)
 
 # get all products
 def dataGetProducts():
-    response = (supabase.table("product")
-                .select("*")
-                .order("title", desc=False)
+    response = (supabase.from_("product")
+                .select("id, title, description, stock, price, thumbnail, category(name)")
                 .execute()
     )
 
@@ -76,4 +75,16 @@ def dataDeleteProduct(id):
         .eq('id', id)
         .execute()
     )
+    return response.data
+
+
+def dataGetProductsByCategory(id):
+    response = (
+        supabase.table("product")
+        .select("*, category(name)")
+        .eq("category_id", id)
+        .execute()
+    )
+
+    print("Response Data:", response.data)
     return response.data
